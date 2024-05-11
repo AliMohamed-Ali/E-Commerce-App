@@ -3,14 +3,14 @@ import 'package:e_commerce_app/utils/routes.dart';
 import 'package:e_commerce_app/views/widget/app_button.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class AuthPage extends StatefulWidget {
+  const AuthPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<AuthPage> createState() => _AuthPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _AuthPageState extends State<AuthPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -113,7 +113,9 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 const Expanded(child: SizedBox()),
-                const Text("Or login with social account"),
+                Text(_authType == AuthType.login
+                    ? "Or login with social account"
+                    : "Or signup with social account"),
                 const SizedBox(height: 12),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,6 @@
-class AppRoutes{
+class AppRoutes {
   static const String landingPageRoute = '/';
   static const String splashPageRoute = '/splash';
-  static const String loginPageRoute = '/login';
+  static const String authPageRoute = '/auth';
   static const String homePageRoute = '/home';
 }

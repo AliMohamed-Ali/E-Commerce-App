@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'E-Commerce App',
       theme: const AppTheme().themeData,
       onGenerateRoute: generateRoute,
-      initialRoute: AppRoutes.loginPageRoute,
+      initialRoute: AppRoutes.authPageRoute,
     );
   }
 }
