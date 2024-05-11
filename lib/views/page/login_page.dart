@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/utils/enums.dart';
 import 'package:e_commerce_app/utils/routes.dart';
 import 'package:e_commerce_app/views/widget/app_button.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  var _authType = AuthType.login;
   bool isVisible = false;
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Text(
-                  "Login",
+                  _authType == AuthType.login ? "Login" : "Signup",
                   style: textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 64),
@@ -67,22 +69,24 @@ class _LoginPageState extends State<LoginPage> {
                               : const Icon(Icons.visibility_off))),
                 ),
                 const SizedBox(height: 16),
-                InkWell(
-                  onTap: () {},
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "Forgot password?",
-                      style: TextStyle(
-                        color: colorScheme.primary,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
+                _authType == AuthType.login
+                    ? InkWell(
+                        onTap: () {},
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Forgot password?",
+                            style: TextStyle(
+                              color: colorScheme.primary,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
                 const SizedBox(height: 24),
                 AppButton(
-                    text: 'Login',
+                    text: _authType == AuthType.login ? "Login" : "Signup",
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         Navigator.pushNamed(
@@ -93,13 +97,19 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+                    Text(_authType == AuthType.login
+                        ? "Don't have an account?"
+                        : "Already have an account?"),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, AppRoutes.registerPageRoute);
+                          if (_authType == AuthType.login) {
+                            setState(() => _authType = AuthType.signup);
+                          } else {
+                            setState(() => _authType = AuthType.login);
+                          }
                         },
-                        child: const Text("Register")),
+                        child: Text(
+                            _authType == AuthType.login ? "Signup" : "Login")),
                   ],
                 ),
                 const Expanded(child: SizedBox()),
