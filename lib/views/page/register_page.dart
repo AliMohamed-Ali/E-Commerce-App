@@ -2,14 +2,14 @@ import 'package:e_commerce_app/utils/routes.dart';
 import 'package:e_commerce_app/views/widget/app_button.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Text(
-                  "Login",
+                  "Register",
                   style: textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 64),
@@ -82,22 +82,21 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 24),
                 AppButton(
-                    text: 'Login',
+                    text: 'Register',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.pushNamed(
-                            context, AppRoutes.landingPageRoute);
+                        Navigator.pushNamed(context, AppRoutes.loginPageRoute);
                       }
                     }),
                 const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+                    const Text("Already have an account?"),
                     TextButton(
                         onPressed: () {
                           Navigator.pushNamed(
-                              context, AppRoutes.registerPageRoute);
+                              context, AppRoutes.landingPageRoute);
                         },
                         child: const Text("Register")),
                   ],
