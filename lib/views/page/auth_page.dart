@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/utils/enums.dart';
 import 'package:e_commerce_app/utils/routes.dart';
 import 'package:e_commerce_app/views/widget/app_button.dart';
@@ -14,13 +16,25 @@ class _AuthPageState extends State<AuthPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final emailFocusNode = FocusNode();
+  final passwordFocusNode = FocusNode();
   var _authType = AuthType.login;
-  bool isVisible = false;
+  bool isVisible = true;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -35,6 +49,10 @@ class _AuthPageState extends State<AuthPage> {
                 const SizedBox(height: 64),
                 TextFormField(
                   controller: emailController,
+                  focusNode: emailFocusNode,
+                  onEditingComplete: () =>
+                      FocusScope.of(context).requestFocus(passwordFocusNode),
+                  textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -50,6 +68,7 @@ class _AuthPageState extends State<AuthPage> {
                 const SizedBox(height: 24),
                 TextFormField(
                   controller: passwordController,
+                  focusNode: passwordFocusNode,
                   obscureText: isVisible,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -89,6 +108,7 @@ class _AuthPageState extends State<AuthPage> {
                     text: _authType == AuthType.login ? "Login" : "Signup",
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        log("Authenticated");
                         Navigator.pushNamed(
                             context, AppRoutes.landingPageRoute);
                       }
@@ -102,6 +122,7 @@ class _AuthPageState extends State<AuthPage> {
                         : "Already have an account?"),
                     TextButton(
                         onPressed: () {
+                          _formKey.currentState!.reset();
                           if (_authType == AuthType.login) {
                             setState(() => _authType = AuthType.signup);
                           } else {
