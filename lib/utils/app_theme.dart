@@ -65,6 +65,8 @@ class AppTheme {
       enabledBorder: _enabledBorder,
       focusedBorder: _focusedBorder,
       disabledBorder: _disabledBorder,
+      errorBorder: _errorBorder,
+      focusedErrorBorder: _errorBorder,
     );
   }
 
@@ -83,6 +85,12 @@ class AppTheme {
     return OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(color: _colorScheme.outline));
+  }
+
+  static InputBorder get _errorBorder {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: _colorScheme.error));
   }
 
   static InputBorder get _focusedBorder {
