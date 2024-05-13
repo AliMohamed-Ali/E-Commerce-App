@@ -109,8 +109,7 @@ class _AuthPageState extends State<AuthPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         log("Authenticated");
-                        Navigator.pushNamed(
-                            context, AppRoutes.landingPageRoute);
+                        Navigator.pushNamed(context, AppRoutes.bottomNavRoute);
                       }
                     }),
                 const SizedBox(height: 12),
