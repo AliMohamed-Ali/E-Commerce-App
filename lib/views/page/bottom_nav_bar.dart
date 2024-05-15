@@ -17,7 +17,7 @@ class BottomNavBar extends StatelessWidget {
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.badge),
+        icon: const Icon(Icons.shopping_bag),
         title: ("Shop"),
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.grey,
@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.favorite),
+        icon: const Icon(Icons.favorite_border),
         title: ("Favorites"),
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.grey,
@@ -46,10 +46,10 @@ class BottomNavBar extends StatelessWidget {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      const Placeholder(),
-      const Placeholder(),
-      const Placeholder(),
-      const Placeholder(),
+      Container(),
+      Container(),
+      Container(),
+      Container(),
     ];
   }
 
