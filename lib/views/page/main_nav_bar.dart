@@ -1,9 +1,10 @@
 import 'package:e_commerce_app/views/page/home.dart';
+import 'package:e_commerce_app/views/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class BottomNavBar extends StatelessWidget {
-  BottomNavBar({super.key});
+class MainNavBar extends StatelessWidget {
+  MainNavBar({super.key});
 
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
@@ -49,7 +50,7 @@ class BottomNavBar extends StatelessWidget {
       Container(),
       Container(),
       Container(),
-      Container(),
+      ProfilePage(),
     ];
   }
 

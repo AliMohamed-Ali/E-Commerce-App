@@ -1,8 +1,10 @@
+import 'package:e_commerce_app/models/product.dart';
 import 'package:e_commerce_app/utils/app_assets.dart';
 import 'package:flutter/material.dart';
 
 class ListItem extends StatelessWidget {
-  const ListItem({super.key});
+  const ListItem({super.key, required this.product});
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,9 @@ class ListItem extends StatelessWidget {
                       color: colorScheme.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Text(
-                      "-20%",
-                      style: TextStyle(
+                    child: Text(
+                      "-${product.discountValue}%",
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -64,27 +66,31 @@ class ListItem extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            const Row(
+            Row(
               children: [
-                Icon(Icons.star, color: Colors.amber, size: 14),
-                Icon(Icons.star, color: Colors.amber, size: 14),
-                Icon(Icons.star, color: Colors.amber, size: 14),
-                Icon(Icons.star, color: Colors.amber, size: 14),
-                Icon(Icons.star, color: Colors.amber, size: 14),
-                SizedBox(width: 4),
-                Text(
+                ...List.generate(
+                    product.rate?.toInt() ?? 1,
+                    (index) =>
+                        const Icon(Icons.star, color: Colors.amber, size: 14)),
+                // Icon(Icons.star, color: Colors.amber, size: 14),
+                // Icon(Icons.star, color: Colors.amber, size: 14),
+                // Icon(Icons.star, color: Colors.amber, size: 14),
+                // Icon(Icons.star, color: Colors.amber, size: 14),
+                // Icon(Icons.star, color: Colors.amber, size: 14),
+                const SizedBox(width: 4),
+                const Text(
                   "(10)",
                   style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
               ],
             ),
-            const Text(
-              "Dorothy Perkins",
-              style: TextStyle(color: Colors.grey),
+            Text(
+              product.title,
+              style: const TextStyle(color: Colors.grey),
             ),
             Text(
-              "Sneakers",
+              product.category,
               style: textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
@@ -93,7 +99,7 @@ class ListItem extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "\$180",
+                  "\$${product.price}",
                   style: textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.grey,
@@ -103,7 +109,7 @@ class ListItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  "\$120",
+                  "\$${product.price - (product.price * (product.discountValue?.toInt() ?? 0) / 100)}",
                   style: textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: colorScheme.primary,

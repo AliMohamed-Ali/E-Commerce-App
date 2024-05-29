@@ -56,6 +56,15 @@ class AuthController with ChangeNotifier {
   }
 
   @override
+  Future<void> logout() async {
+    try {
+      await auth.signOut();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   void dispose() {
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
